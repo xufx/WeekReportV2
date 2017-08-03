@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>WeekReportV2</display-name>
+
+  
+<!-- 1、​web.xml先读取context-param和listener这两种节点； -->
+<!-- 2、然后容器创建一个ServletContext(上下文)，应用于整个项目； -->
+<!-- ​3、容器会将读取到的context-param转化为键值对并存入servletContext； -->
+<!-- ​4、根据listener创建监听； -->
+<!-- 5、容器会读取，根据指定的类路径来实例化过滤器； -->
+<!-- 6、此时项目初始化完成； -->
+<!-- 7、在发起第一次请求是，servlet节点才会被加载实例化。​ -->
+ 
+  
+     <!-- spring listener -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+    
+      <!-- spring -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/applicationContext.xml</param-value>
+  </context-param>
+ 
+   <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  
+  <servlet>
+    <servlet-name>spring</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+     <param-value>/WEB-INF/spring-mvc.xml</param-value>  
+                                  <!-- 上面是放在 resources下， 也可以配置在 /WEB-INF/spring-mvc.xml -->
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>spring</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>   
+  
+  
+</web-app>
